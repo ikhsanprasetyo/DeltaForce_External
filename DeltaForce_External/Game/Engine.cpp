@@ -307,55 +307,55 @@ namespace Bone
 	enum Bone : INT
 	{
 		//---------//
-		Õ∑≤ø = 15,
-		æ±≤ø = 31,
+		Bone15 = 15,
+		Bone31 = 31,
 		//---------//
-		◊ÛºÁ = 34,
-		”“ºÁ = 6,
+		Bone34 = 34,
+		Bone6 = 6,
 		//---------//
-		◊Û÷‚ = 35,
-		”“÷‚ = 7,
+		Bone35 = 35,
+		Bone7 = 7,
 		//---------//
-		◊Û ÷ = 36,
-		”“ ÷ = 8,
+		Bone36 = 36,
+		Bone8 = 8,
 		//---------//
-		π«≈Ë = 1,
+		Bone1 = 1,
 		//---------//
-		◊ÛÕ» = 58,
-		”“Õ» = 62,
+		Bone58 = 58,
+		Bone62 = 62,
 		//---------//
-		◊Ûœ• = 59,
-		”“œ• = 63,
+		Bone59 = 59,
+		Bone63 = 63,
 		//---------//
-		◊ÛΩ≈∏˙ = 60,
-		◊ÛΩ≈«∞ = 64,
-		”“Ω≈∏˙ = 64,
-		”“Ω≈«∞ = 175,
+		Bone60 = 60,
+		Bone64 = 64,
+		Bone64b = 64,
+		Bone175 = 175,
 		//---------//
-		Ω≈µ◊ = 193,
-		…ÌÃÂ = 4,
+		Bone193 = 193,
+		Bone4 = 4,
 	};
 
 	//list<INT> _…œ≤ø = { Bone::æ±≤ø, Bone::Õ∑≤ø };
-	list<INT> _”“±€ = { Bone::æ±≤ø, Bone::”“ºÁ, Bone::”“÷‚, Bone::”“ ÷ };
-	list<INT> _◊Û±€ = { Bone::æ±≤ø, Bone::◊ÛºÁ, Bone::◊Û÷‚, Bone::◊Û ÷ };
-	list<INT> _ºπ÷˘ = { Bone::æ±≤ø, 4, 3, 2, Bone::π«≈Ë };
-	list<INT> _”“Õ» = { Bone::π«≈Ë, Bone::”“Õ», Bone::”“œ•, Bone::”“Ω≈∏˙ };
-	list<INT> _◊ÛÕ» = { Bone::π«≈Ë, Bone::◊ÛÕ», Bone::◊Ûœ•, Bone::◊ÛΩ≈∏˙};
-	list<list<INT>> ∆¥Ω”π«˜¿ = {  _”“±€, _◊Û±€, _ºπ÷˘, _”“Õ», _◊ÛÕ» };
+	list<INT> BonesHead = { Bone::Bone31, Bone::Bone6, Bone::Bone7, Bone::Bone8 };
+	list<INT> BonesUpper = { Bone::Bone31, Bone::Bone34, Bone::Bone35, Bone::Bone36 };
+	list<INT> BonesTop = { Bone::Bone31, 4, 3, 2, Bone::Bone1 };
+	list<INT> BonesMid = { Bone::Bone1, Bone::Bone62, Bone::Bone63, Bone::Bone64b };
+	list<INT> BonesBot = { Bone::Bone1, Bone::Bone58, Bone::Bone59, Bone::Bone60};
+	list<list<INT>> AllBones = {  BonesHead, BonesUpper, BonesTop, BonesMid, BonesBot };
 }
-VOID DrawPlayerBone(ULONG_PTR Mesh, ImVec4 Color, FLOAT Width, BOOL  «∑Òø… ”)
+VOID DrawPlayerBone(ULONG_PTR Mesh, ImVec4 Color, FLOAT Width, BOOL BoolInput)
 {
-	Vector3 NeckPosition = GetBonePosition(Mesh, Bone::æ±≤ø);
-	Vector3 WaistPosition = GetBonePosition(Mesh, Bone::π«≈Ë);
+	Vector3 NeckPosition = GetBonePosition(Mesh, Bone::Bone31);
+	Vector3 WaistPosition = GetBonePosition(Mesh, Bone::Bone1);
 	Vector3 previous, current;
 	Vector2 p1, c1;
-	for (auto i : Bone::∆¥Ω”π«˜¿)
+	for (auto i : Bone::AllBones)
 	{
 		previous = Vector3(0, 0, 0);
 		for (int bone : i)
 		{
-			current = bone == Bone::æ±≤ø ? NeckPosition : (bone == Bone::π«≈Ë ? WaistPosition : GetBonePosition(Mesh, bone));
+			current = bone == Bone::Bone31 ? NeckPosition : (bone == Bone::Bone1 ? WaistPosition : GetBonePosition(Mesh, bone));
 			if (previous.x == 0.f)
 			{
 				previous = current;
@@ -410,7 +410,7 @@ void OverlyCall()
 
 		char* Name = TempActor[i].Name;
 		if (LocalPlayerTeamNum == TeamNumber|| LocalPlayerTeamNum2 == TeamNumber2)continue;
-		Vector3 PlayerPos = GetBonePosition(MeshPtr, Bone::æ±≤ø); 
+		Vector3 PlayerPos = GetBonePosition(MeshPtr, Bone::Bone31); 
 
 		float Distance = PlayerPos.GetDistance(LocalPlayerPos);
 	
@@ -470,7 +470,7 @@ void OverlyCall()
 	}
 	if (GameData::Base::AimTarget.Actor != 0)
 	{
-		Vector3 PlayerPos = GetBonePosition(GameData::Base::AimTarget.Mesh, GetAsyncKeyState(VK_SHIFT) ? Bone::æ±≤ø : 1);
+		Vector3 PlayerPos = GetBonePosition(GameData::Base::AimTarget.Mesh, GetAsyncKeyState(VK_SHIFT) ? Bone::Bone31 : 1);
 		Vector2 ScreenPos = WorldToScreen(PlayerPos);
 		if (ScreenPos.x <= 0 && ScreenPos.y <= 0)
 		{
